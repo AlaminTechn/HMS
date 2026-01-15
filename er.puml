@@ -1,0 +1,107 @@
+@startuml ER Diagram - Hospital Management System
+
+entity "User" as U {
+    + user_id : INTEGER
+    --
+    name : VARCHAR
+    email : VARCHAR
+    role : VARCHAR
+    password : VARCHAR
+    created_at : TIMESTAMP
+}
+
+entity "Patient" as P {
+    + patient_id : INTEGER
+    --
+    name : VARCHAR
+    age : INTEGER
+    gender : VARCHAR
+    contact : VARCHAR
+    address : VARCHAR
+    medical_history : TEXT
+    user_id : INTEGER
+}
+
+entity "Doctor" as D {
+    + doctor_id : INTEGER
+    --
+    name : VARCHAR
+    specialization : VARCHAR
+    contact : VARCHAR
+    schedule : TEXT
+    user_id : INTEGER
+}
+
+entity "Appointment" as A {
+    + appointment_id : INTEGER
+    --
+    patient_id : INTEGER
+    doctor_id : INTEGER
+    date : DATE
+    time : TIME
+    status : VARCHAR
+    notes : TEXT
+}
+
+entity "Prescription" as PR {
+    + prescription_id : INTEGER
+    --
+    patient_id : INTEGER
+    doctor_id : INTEGER
+    date : DATE
+    medicine_list : TEXT
+    note : TEXT
+}
+
+entity "Medicine" as M {
+    + medicine_id : INTEGER
+    --
+    name : VARCHAR
+    stock : INTEGER
+    expiry_date : DATE
+    price : DECIMAL
+}
+
+entity "Bill" as B {
+    + bill_id : INTEGER
+    --
+    patient_id : INTEGER
+    date : DATE
+    total_amount : DECIMAL
+    payment_status : VARCHAR
+    payment_method : VARCHAR
+}
+
+entity "LabTest" as L {
+    + test_id : INTEGER
+    --
+    patient_id : INTEGER
+    test_name : VARCHAR
+    result : TEXT
+    date : DATE
+    doctor_id : INTEGER
+}
+
+entity "Room" as R {
+    + room_id : INTEGER
+    --
+    type : VARCHAR
+    status : VARCHAR
+    assigned_patient : INTEGER
+    capacity : INTEGER
+}
+
+' Relationships
+U ||--o{ P : manages
+U ||--o{ D : is
+P ||--o{ A : books
+D ||--o{ A : has
+P ||--o{ PR : has
+D ||--o{ PR : writes
+PR }o--o{ M : contains
+P ||--o{ B : has
+P ||--o{ L : undergoes
+D ||--o{ L : orders
+R ||--o{ P : occupies
+
+@enduml

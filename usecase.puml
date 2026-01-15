@@ -1,0 +1,86 @@
+@startuml Use Case Diagram - Hospital Management System
+
+left to right direction
+
+actor Admin as A
+actor Doctor as D
+actor Nurse as N
+actor Receptionist as R
+actor Pharmacist as P
+actor Accountant as AC
+actor Patient as PT
+
+rectangle "Hospital Management System" {
+    usecase "Manage Users" as MU
+    usecase "View Reports" as VR
+
+    usecase "View Appointments" as VA
+    usecase "Update Prescriptions" as UP
+    usecase "Access Patient History" as APH
+
+    usecase "Update Patient Vitals" as UPV
+    usecase "Monitor Room Status" as MRS
+
+    usecase "Register Patients" as RP
+    usecase "Schedule Appointments" as SA
+
+    usecase "Issue Drugs" as ID
+    usecase "Update Inventory" as UI
+
+    usecase "Generate Invoices" as GI
+    usecase "Track Payments" as TP
+
+    usecase "Book Appointments" as BA
+    usecase "View Prescriptions" as VP
+    usecase "Pay Bills" as PB
+
+    usecase "Manage Patient Records" as MPR
+    usecase "Manage Billing" as MB
+    usecase "Manage Pharmacy" as MP
+    usecase "Manage Laboratory" as ML
+    usecase "Manage Wards" as MW
+    usecase "Manage Appointments" as MAP
+}
+
+A --> MU
+A --> VR
+
+D --> VA
+D --> UP
+D --> APH
+
+N --> UPV
+N --> MRS
+
+R --> RP
+R --> SA
+
+P --> ID
+P --> UI
+
+AC --> GI
+AC --> TP
+
+PT --> BA
+PT --> VP
+PT --> PB
+
+' System functionalities
+MU --> MPR
+VR --> MPR
+VA --> MAP
+UP --> MPR
+APH --> MPR
+UPV --> MPR
+MRS --> MW
+RP --> MPR
+SA --> MAP
+ID --> MP
+UI --> MP
+GI --> MB
+TP --> MB
+BA --> MAP
+VP --> MP
+PB --> MB
+
+@enduml

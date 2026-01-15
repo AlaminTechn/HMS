@@ -1,0 +1,70 @@
+@startuml DFD Level 1 - Hospital Management System
+
+' External Entities
+actor Admin as A
+actor Doctor as D
+actor Nurse as N
+actor Receptionist as R
+actor Pharmacist as P
+actor Accountant as AC
+actor Patient as PT
+
+' Sub-processes
+rectangle "Patient Registration" as PR
+rectangle "Appointment Scheduling" as AS
+rectangle "Medical Consultation" as MC
+rectangle "Treatment & Prescription" as TP
+rectangle "Billing & Payment" as BP
+rectangle "Inventory Management" as IM
+rectangle "Report Generation" as RG
+
+' Data Stores
+database "Patient Records" as PDB
+database "Staff Records" as SDB
+database "Appointment Data" as ADB
+database "Medicine Inventory" as MDB
+database "Billing Records" as BDB
+database "Laboratory Results" as LDB
+
+' External Entity Flows
+R --> PR : Register Patients
+PT --> PR : Provide Info
+PT --> AS : Request Appointments
+R --> AS : Schedule Appointments
+D --> MC : Conduct Consultations
+N --> MC : Assist in Care
+PT --> MC : Medical History
+D --> TP : Prescribe Treatment
+N --> TP : Administer Care
+P --> TP : Dispense Medicine
+PT --> BP : Make Payments
+AC --> BP : Process Bills
+P --> IM : Manage Stock
+AC --> IM : Monitor Inventory
+A --> RG : Generate Reports
+
+' Sub-process Data Flows
+PR --> PDB : Store Patient Data
+AS --> ADB : Update Appointments
+AS --> PDB : Check Availability
+MC --> PDB : Access Records
+MC --> LDB : Store Results
+TP --> PDB : Update Treatment
+TP --> MDB : Check Stock
+TP --> LDB : Access Results
+BP --> BDB : Generate Bills
+BP --> PDB : Access Records
+IM --> MDB : Update Inventory
+RG --> PDB : Access Data
+RG --> SDB : Access Staff Data
+RG --> ADB : Access Appointments
+RG --> BDB : Access Bills
+RG --> LDB : Access Lab Data
+
+' Internal Sub-process Flows (if needed for clarity)
+PR --> AS : Patient Info
+AS --> MC : Appointment Details
+MC --> TP : Consultation Notes
+TP --> BP : Treatment Costs
+
+@enduml

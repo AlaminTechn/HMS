@@ -1,0 +1,439 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{url}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\begin{document}
+
+\title{Hospital Management System (HMS): Full Project Documentation\\
+Software Requirements Specification (SRS)\\
+University Bangladesh}
+
+\author{
+\IEEEauthorblockN{Shuvo Mozumder}
+\IEEEauthorblockA{Student ID: XXX}
+\and
+\IEEEauthorblockN{Alamin Sarker}
+\IEEEauthorblockA{Student ID: XXX}
+\and
+\IEEEauthorblockN{Jibon Ray}
+\IEEEauthorblockA{Student ID: XXX}
+\and
+\IEEEauthorblockN{MD. Shakil}
+\IEEEauthorblockA{Student ID: XXX}
+\and
+\IEEEauthorblockN{Naimur Rahman}
+\IEEEauthorblockA{Student ID: XXX}
+\and
+\IEEEauthorblockN{Tarin Mustari}
+\IEEEauthorblockA{Student ID: XXX}
+\and
+\IEEEauthorblockN{MD. Mahedi Ahsan}
+\IEEEauthorblockA{Student ID: XXX}
+}
+
+\maketitle
+
+\begin{abstract}
+This document presents the Software Requirements Specification (SRS) for a Hospital Management System (HMS) designed to streamline hospital operations in Bangladesh. The system aims to automate administrative processes, manage patient records, facilitate appointments, and provide real-time reporting. Inspired by leading Bangladeshi hospitals such as Ibn Sina, Labaid, and Bardem, the system incorporates features for comprehensive healthcare management including pharmacy, laboratory, and billing modules.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Hospital Management System, SRS, Bangladesh Healthcare, Patient Management, Medical Records
+\end{IEEEkeywords}
+
+\section{Introduction}
+
+\subsection{Purpose}
+The purpose of this Software Requirements Specification (SRS) document is to outline the requirements for developing a comprehensive Hospital Management System (HMS) suitable for Bangladeshi healthcare facilities. The system will digitize hospital operations, improve patient care, and enhance administrative efficiency.
+
+\subsection{Scope}
+The HMS covers core hospital services including patient registration, doctor scheduling, appointment booking, billing, medical records, pharmacy management, laboratory services, and reporting. The system will be web-based with role-based access control for various user types.
+
+\subsection{Definitions, Acronyms, and Abbreviations}
+\begin{itemize}
+\item HMS: Hospital Management System
+\item SRS: Software Requirements Specification
+\item ER: Entity-Relationship
+\item DFD: Data Flow Diagram
+\item UML: Unified Modeling Language
+\end{itemize}
+
+\subsection{References}
+\begin{enumerate}
+\item IEEE Standard for Software Requirements Specifications (IEEE 830-1998)
+\item Bangladesh Medical Association Guidelines
+\item Hospital Information System standards
+\end{enumerate}
+
+\subsection{Overview}
+The document is organized as follows: Section II covers system overview and scope, Section III describes user roles, Section IV details functional requirements, Section V covers non-functional requirements, Section VI presents system design, and Section VII outlines implementation plan.
+
+\section{Project Overview}
+
+\subsection{Project Title}
+Hospital Management System (HMS)
+
+\subsection{Objective}
+To design and develop a computerized system to manage hospital operations efficiently, inspired by Bangladesh's leading hospitals like Ibn Sina, Labaid, and Bardem.
+
+\subsection{Bangladesh Healthcare Context}
+Bangladesh's healthcare sector has seen significant growth with modern facilities like:
+\begin{itemize}
+\item Ibn Sina Hospital: Multi-specialty hospital offering cardiology, oncology, and emergency services
+\item Labaid Specialized Hospital: Known for cardiac care and cancer treatment
+\item Bangladesh Institute of Research and Rehabilitation in Diabetes, Endocrine and Metabolic Disorders (BIRDEM): Specialized in diabetes management
+\end{itemize}
+
+These institutions provide models for comprehensive healthcare management, which this HMS aims to emulate through digital solutions.
+
+\subsection{Goals}
+\begin{itemize}
+\item Automate hospital administrative processes
+\item Maintain accurate patient and doctor records
+\item Improve patient care through digital data access
+\item Provide real-time reports for management decisions
+\item Ensure data security and privacy compliance
+\end{itemize}
+
+\section{System Scope}
+
+The system covers the following core hospital services:
+\begin{itemize}
+\item Patient management services
+\item Doctor and staff management services
+\item Appointment and scheduling system services
+\item Medical records \& prescriptions services
+\item Billing \& payment system services
+\item Pharmacy and inventory management services
+\item Laboratory management services
+\item Ward/room management services
+\item Reporting \& analytics services
+\end{itemize}
+
+\section{System Users and Roles}
+
+\begin{table}[h]
+\caption{System Users and Roles}
+\label{tab:users}
+\centering
+\begin{tabular}{|p{2cm}|p{4cm}|p{5cm}|}
+\hline
+\textbf{User Role} & \textbf{Description} & \textbf{Example Activities} \\
+\hline
+Admin & Manages the entire system & Manage users, set permissions, view reports \\
+\hline
+Doctor & Provides healthcare services & View appointments, update prescriptions, access patient history \\
+\hline
+Nurse & Assists doctor and handles patient care & Update patient vitals, monitor room status \\
+\hline
+Receptionist & Handles front-desk operations & Register patients, schedule appointments \\
+\hline
+Pharmacist & Manages medicines and stock & Issue drugs, update inventory \\
+\hline
+Accountant & Handles billing and payments & Generate invoices, track payments \\
+\hline
+Patient & Receives services & Book appointments, view prescriptions, pay bills \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{System Modules}
+
+\subsection{A. User Management Module}
+\begin{itemize}
+\item User registration and login
+\item Role \& permission control
+\item Password reset \& profile management
+\end{itemize}
+
+\subsection{B. Patient Management Module}
+\begin{itemize}
+\item Register new patients
+\item Maintain patient personal details and medical history
+\item Search/view patient records
+\item Assign doctors
+\end{itemize}
+
+\subsection{C. Appointment Management Module}
+\begin{itemize}
+\item Schedule, reschedule, or cancel appointments
+\item Doctor-wise daily schedule view
+\item Notifications/reminders
+\end{itemize}
+
+\subsection{D. Pharmacy Management Module}
+\begin{itemize}
+\item Add/update medicines
+\item Track medicine stock and expiry dates
+\item Issue medicines for prescriptions
+\item Generate inventory reports
+\end{itemize}
+
+\subsection{E. Billing \& Payment Module}
+\begin{itemize}
+\item Generate invoices
+\item Manage payment methods
+\item View billing history
+\end{itemize}
+
+\subsection{F. Laboratory Management Module}
+\begin{itemize}
+\item Record lab tests and results
+\item Assign lab tests to patients
+\item Generate lab test reports
+\end{itemize}
+
+\subsection{G. Ward/Room Management Module}
+\begin{itemize}
+\item Track room and bed availability
+\item Assign beds to admitted patients
+\item Manage discharge and room transfer
+\end{itemize}
+
+\subsection{H. Reporting Module}
+\begin{itemize}
+\item Daily/Monthly reports
+\item Doctor-wise patient count
+\item Revenue and expense analysis
+\end{itemize}
+
+\subsection{I. Authentication \& Authorization Module}
+\begin{itemize}
+\item Secure login via JWT
+\item Role-based access control
+\item Audit logs
+\end{itemize}
+
+\section{System Architecture}
+
+\subsection{Frontend}
+React.js / Next.js with responsive design
+
+\subsection{Backend}
+Django REST Framework / Node.js with Express
+
+\subsection{Database}
+PostgreSQL / MySQL with data encryption
+
+\subsection{API}
+RESTful API with GraphQL support
+
+\subsection{Hosting}
+\begin{itemize}
+\item Frontend: Vercel / Netlify
+\item Backend: DigitalOcean / AWS
+\item Database: Managed cloud database
+\end{itemize}
+
+\section{System Analysis}
+
+\subsection{Functional Requirements}
+
+\subsubsection{FR1: Patient Registration}
+The system shall allow patients to register online with personal and medical information.
+
+\subsubsection{FR2: Appointment Booking}
+The system shall enable patients to book appointments with doctors based on availability.
+
+\subsubsection{FR3: Medical Record Management}
+The system shall store and retrieve patient medical records securely.
+
+\subsubsection{FR4: Billing System}
+The system shall generate bills and receipts for services rendered.
+
+\subsubsection{FR5: User Access Control}
+The system shall control user access by roles and permissions.
+
+\subsubsection{FR6: Reporting}
+The system shall generate various reports for management analysis.
+
+\subsection{Non-Functional Requirements}
+
+\subsubsection{Performance}
+\begin{itemize}
+\item Page load time: < 2 seconds
+\item Concurrent users: 100+
+\end{itemize}
+
+\subsubsection{Security}
+\begin{itemize}
+\item Password encryption
+\item JWT authentication
+\item Data privacy compliance (HIPAA-like standards)
+\end{itemize}
+
+\subsubsection{Scalability}
+The system shall handle increasing user load and data volume.
+
+\subsubsection{Reliability}
+99.9\% uptime with backup and recovery mechanisms.
+
+\subsubsection{Usability}
+Intuitive interface for all user roles.
+
+\subsubsection{Compatibility}
+Cross-browser support and mobile responsiveness.
+
+\section{Data Modeling}
+
+\subsection{Entity-Relationship Diagram}
+The ER diagram includes the following main entities:
+
+\begin{itemize}
+\item User (user\_id, name, email, role, password)
+\item Patient (patient\_id, name, age, gender, contact, address, medical\_history)
+\item Doctor (doctor\_id, name, specialization, contact, schedule)
+\item Appointment (appointment\_id, patient\_id, doctor\_id, date, time, status)
+\item Prescription (prescription\_id, patient\_id, doctor\_id, date, medicine\_list, note)
+\item Medicine (medicine\_id, name, stock, expiry\_date, price)
+\item Bill (bill\_id, patient\_id, date, total\_amount, payment\_status)
+\item LabTest (test\_id, patient\_id, test\_name, result, date)
+\item Room (room\_id, type, status, assigned\_patient)
+\end{itemize}
+
+\subsection{Relationships}
+\begin{itemize}
+\item User 1:N Patient (one doctor/nurse can manage multiple patients)
+\item Patient 1:N Appointment
+\item Doctor 1:N Appointment
+\item Patient 1:N Prescription
+\item Doctor 1:N Prescription
+\item Prescription N:N Medicine
+\item Patient 1:N Bill
+\item Patient 1:N LabTest
+\item Room 1:1 Patient (admitted)
+\end{itemize}
+
+\section{System Design}
+
+\subsection{UML Diagrams}
+
+\subsubsection{Use Case Diagram}
+The use case diagram shows interactions between actors (Admin, Doctor, Patient, etc.) and the system.
+
+\subsubsection{Class Diagram}
+Defines entities, attributes, and relationships.
+
+\subsubsection{Activity Diagram}
+Represents workflows such as patient registration and appointment booking.
+
+\subsubsection{Sequence Diagram}
+Shows step-by-step interactions for processes like patient admission.
+
+\subsubsection{DFD (Data Flow Diagram)}
+Level 0, 1, and 2 diagrams showing data flow through the system.
+
+\subsubsection{ER Diagram}
+Detailed database structure with cardinalities.
+
+\subsection{Database Schema}
+Tables with primary keys, foreign keys, and constraints as per ER model.
+
+\section{Implementation Plan}
+
+\subsection{Phase 1: Requirement Analysis}
+\begin{itemize}
+\item SRS Document completion
+\item Stakeholder interviews
+\item Feature prioritization
+\end{itemize}
+
+\subsection{Phase 2: System Design}
+\begin{itemize}
+\item UML diagrams creation
+\item Database schema design
+\item UI/UX wireframes
+\end{itemize}
+
+\subsection{Phase 3: Development}
+\begin{itemize}
+\item Frontend development
+\item Backend API development
+\item Database implementation
+\item Module integration
+\end{itemize}
+
+\subsection{Phase 4: Testing}
+\begin{itemize}
+\item Unit testing
+\item Integration testing
+\item System testing
+\item User acceptance testing
+\end{itemize}
+
+\subsection{Phase 5: Deployment}
+\begin{itemize}
+\item Production environment setup
+\item Data migration
+\item Go-live preparation
+\end{itemize}
+
+\subsection{Phase 6: Maintenance}
+\begin{itemize}
+\item Bug fixes
+\item Feature enhancements
+\item Performance monitoring
+\end{itemize}
+
+\section{Tools and Technologies}
+
+\subsection{Programming}
+\begin{itemize}
+\item Python (Django REST Framework)
+\item JavaScript (React.js/Next.js)
+\end{itemize}
+
+\subsection{Database}
+PostgreSQL with backup and replication.
+
+\subsection{Modeling}
+\begin{itemize}
+\item Draw.io for diagrams
+\item PlantUML for UML diagrams
+\end{itemize}
+
+\subsection{Testing}
+\begin{itemize}
+\item Postman for API testing
+\item Jest for frontend testing
+\item Pytest for backend testing
+\end{itemize}
+
+\subsection{Version Control}
+Git with GitHub for collaboration.
+
+\subsection{Deployment}
+\begin{itemize}
+\item Vercel for frontend
+\item DigitalOcean for backend
+\item Docker for containerization
+\end{itemize}
+
+\section{Deliverables}
+
+\begin{itemize}
+\item SRS Document (this document)
+\item System Design Diagrams (Use Case, ER, DFD)
+\item Database Schema
+\item Prototype Screens (Figma mockups)
+\item Source Code Repository
+\item Test Cases and Results
+\item User Manual
+\item Deployment Guide
+\end{itemize}
+
+\section{Conclusion}
+
+This SRS provides a comprehensive foundation for developing a Hospital Management System tailored for Bangladesh's healthcare needs. The system incorporates best practices from leading local hospitals while ensuring compliance with international standards for healthcare software. The modular design allows for phased implementation and future scalability.
+
+\end{document}
