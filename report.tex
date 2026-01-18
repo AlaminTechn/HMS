@@ -8,39 +8,54 @@
 \usepackage{url}
 \usepackage{xcolor}
 \usepackage{hyperref}
+\usepackage{times}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
 \usepackage{geometry}
 \geometry{a4paper, margin=1in}
 
+\titleformat{\chapter}[display]{\normalfont\huge\bfseries}{\underline{\chaptertitlename\ \thechapter}}{20pt}{\Huge}
+
 \begin{document}
+
+\renewcommand{\labelitemi}{$\rightarrow$}
+
+% Set page style for headers and footers
+\pagestyle{fancy}
+\fancyhead[L]{\footnotesize HMS - SRS}
+\fancyhead[R]{\footnotesize \thepage}
+\fancyfoot[C]{\footnotesize HMS - SRS}
+\renewcommand{\headrulewidth}{0.4pt}
 
 % Cover Page
 \begin{titlepage}
 \centering
 {\huge\bfseries Hospital Management System (HMS)}\\
-{\Large Full Project Documentation}\\
+{\Large Full Project Report}\\
 {\Large Software Requirements Specification (SRS)}\\
 \vskip 1cm
 {\large University of Bangladesh}\\
 \vskip 2cm
 {\Large Submitted by:}\\
-Shuvo Mozumder (Student ID: XXX)\\
-Alamin Sarker (Student ID: XXX)\\
-Jibon Ray (Student ID: XXX)\\
-MD. Shakil (Student ID: XXX)\\
-Naimur Rahman (Student ID: XXX)\\
-Tarin Mustari (Student ID: XXX)\\
-MD. Mahedi Ahsan (Student ID: XXX)\\
+1. Alamin Sarker (Group Leader) - 202231064043\\
+2. Shuvo Shil - 202231064018\\
+3. Md Shakil - 202231064056\\
+4. Naimur Rahaman - 202231064050\\
+5. Tarin Mustari Sonia - 202231064010\\
+6. Jibon Roy - 202231064073\\
+7. Md Ahasan - 202231064131\\
+8. Abdullah Saad Un-Noor - 202231064097\\
 \vskip 2cm
 {\Large Supervised by:}\\
-Supervisor Name\\
+Rifat Uz Zaman, Lecturer\\
 \vskip 2cm
-{\large \today}
+{\large 24.01.2026}
 \end{titlepage}
 
 % Declaration
 \newpage
 \section*{Declaration}
-I hereby declare that this project report entitled "Hospital Management System (HMS): Full Project Documentation" submitted for the partial fulfillment of the requirements for the degree of Bachelor of Science in Computer Science/Engineering at University of Bangladesh, is my original work and has not been submitted for any other degree or diploma at any other university or institute.
+I hereby declare that this project report entitled "Hospital Management System (HMS): Full Project Report" submitted for the partial fulfillment of the requirements for the degree of Bachelor of Science in Computer Science/Engineering at University of Bangladesh, is my original work and has not been submitted for any other degree or diploma at any other university or institute.
 
 All sources of information used in this report have been duly acknowledged.
 
@@ -48,16 +63,16 @@ All sources of information used in this report have been duly acknowledged.
 Date: \today
 
 \vskip 2cm
-Signature: \underline{\hspace{4cm}}
+Signature: \verb|____________________|
 
-Name: Your Name
+Name: Alamin Sarker
 
-Student ID: Your ID
+Student ID: 202231064043
 
 % Acknowledgement
 \newpage
 \section*{Acknowledgement}
-We would like to express our sincere gratitude to our supervisor [Supervisor Name] for their invaluable guidance, encouragement, and constructive feedback throughout the development of this project. We are also thankful to the faculty members of the Department of Computer Science/Engineering at University of Bangladesh for providing us with the necessary resources and support.
+We would like to express our sincere gratitude to our supervisor Rifat Uz Zamman for their invaluable guidance, encouragement, and constructive feedback throughout the development of this project. We are also thankful to the faculty members of the Department of Computer Science/Engineering at University of Bangladesh for providing us with the necessary resources and support.
 
 Special thanks to the healthcare professionals and administrators who provided insights into the practical aspects of hospital management systems in Bangladesh. Their expertise helped shape the system's requirements to better serve the needs of Bangladeshi healthcare facilities.
 
@@ -325,7 +340,7 @@ The proposed HMS will automate all major hospital functions with the following a
 \section{Feasibility Analysis}
 
 \subsection{Technical Feasibility}
-The proposed technology stack (React.js, Node.js, PostgreSQL) is mature and widely used. The development team has experience with these technologies, making technical implementation feasible.
+The proposed technology stack (React.js, Python, Django, Django Rest Framework, PostgreSQL) is mature and widely used. The development team has experience with these technologies, making technical implementation feasible.
 
 \subsection{Economic Feasibility}
 Cost-benefit analysis shows positive ROI within 18 months. Initial development costs are offset by long-term savings in administrative efficiency and error reduction.
@@ -344,7 +359,7 @@ The HMS follows a three-tier architecture:
 
 \begin{enumerate}
 \item \textbf{Presentation Layer} - React.js frontend for user interfaces
-\item \textbf{Application Layer} - Node.js/Express backend for business logic
+\item \textbf{Application Layer} - Python, Django, Django Rest Framework backend for business logic
 \item \textbf{Data Layer} - PostgreSQL database for data storage
 \end{enumerate}
 
@@ -406,9 +421,9 @@ The context diagram shows the system boundary and external entities:
 \subsection{Level 1 DFD}
 The level 1 DFD shows major functional processes:
 
-\begin{figure}[H]
+\begin{figure}[p]
 \centering
-\includegraphics[width=0.8\textwidth]{DFD Level 1 - Hospital Management System.png}
+\includegraphics[width=\textwidth]{DFD Level 1 - Hospital Management System.png}
 \caption{Level 1 Data Flow Diagram}
 \label{fig:dfd1}
 \end{figure}
@@ -507,7 +522,7 @@ The HMS is implemented using modern web technologies:
 
 \begin{itemize}
 \item \textbf{Frontend:} React.js with Material-UI for responsive design
-\item \textbf{Backend:} Node.js with Express.js framework
+\item \textbf{Backend:} Python, Django, Django Rest Framework
 \item \textbf{Database:} PostgreSQL for data persistence
 \item \textbf{Authentication:} JWT (JSON Web Tokens) for secure access
 \item \textbf{Deployment:} Docker containers for scalability

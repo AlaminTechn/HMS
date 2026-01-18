@@ -1,0 +1,236 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\setbeamertemplate{navigation symbols}{}
+
+\title{Hospital Management System (HMS) - Project Presentation}
+\subtitle{Software Requirements Specification (SRS)}
+\author{Alamin Sarker et al.}
+\institute{University of Bangladesh}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Project Overview}
+\begin{itemize}
+\item \textbf{Project Title:} Hospital Management System (HMS)
+\item \textbf{Institution:} University of Bangladesh
+\item \textbf{Team Members:}
+  \begin{itemize}
+  \item Shuvo Mozumder
+  \item Alamin Sarker
+  \item Jibon Ray
+  \item MD. Shakil
+  \item Naimur Rahman
+  \item Tarin Mustari
+  \item MD. Mahedi Ahsan
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Introduction}
+\begin{itemize}
+\item The Hospital Management System (HMS) is designed to streamline hospital operations in Bangladesh
+\item Inspired by leading institutions like Ibn Sina, Labaid, and Bardem
+\end{itemize}
+
+\textbf{Objectives:}
+\begin{itemize}
+\item Automate administrative processes
+\item Improve patient care through digital records
+\item Enhance operational efficiency
+\item Ensure data security and compliance
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Bangladesh Healthcare Context}
+Bangladesh's healthcare sector features modern facilities:
+\begin{itemize}
+\item \textbf{Ibn Sina Hospital:} Multi-specialty with cardiology, oncology, emergency services
+\item \textbf{Labaid Specialized Hospital:} Known for cardiac care and cancer treatment
+\item \textbf{BIRDEM:} Specialized in diabetes and endocrine disorders
+\end{itemize}
+
+Our HMS aims to emulate these institutions' digital solutions.
+\end{frame}
+
+\begin{frame}
+\frametitle{System Scope}
+The HMS covers:
+\begin{itemize}
+\item Patient Management
+\item Doctor and Staff Management
+\item Appointment Scheduling
+\item Medical Records \& Prescriptions
+\item Billing \& Payment System
+\item Pharmacy Management
+\item Laboratory Management
+\item Ward/Room Management
+\item Reporting \& Analytics
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{System Users and Roles}
+\begin{table}
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|p{2cm}|p{3cm}|p{4cm}|}
+\hline
+\textbf{User Role} & \textbf{Description} & \textbf{Key Activities} \\
+\hline
+Admin & System management & User management, reports \\
+\hline
+Doctor & Healthcare provider & Appointments, prescriptions \\
+\hline
+Nurse & Patient care & Vital updates, room monitoring \\
+\hline
+Receptionist & Front desk & Patient registration, scheduling \\
+\hline
+Pharmacist & Medicine management & Drug issuance, inventory \\
+\hline
+Accountant & Financial operations & Billing, payment tracking \\
+\hline
+Patient & Service recipient & Appointment booking, bill payment \\
+\hline
+\end{tabular}
+}
+\end{table}
+\end{frame}
+
+\begin{frame}
+\frametitle{System Architecture}
+\begin{itemize}
+\item \textbf{Frontend:} React.js/Next.js (Responsive web app)
+\item \textbf{Backend:} Django REST Framework (API services)
+\item \textbf{Database:} PostgreSQL/MySQL (Data storage)
+\item \textbf{Hosting:} Vercel (Frontend), DigitalOcean/AWS (Backend)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Use Case Diagram}
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{Use Case Diagram - Hospital Management System.png}
+\caption{Use Case Diagram}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{ER Diagram}
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{ER Diagram - Hospital Management System.png}
+\caption{Entity-Relationship Diagram}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{DFD Level 0}
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{DFD Level 0 - Hospital Management System.png}
+\caption{Level 0 Data Flow Diagram}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Functional Requirements}
+\begin{enumerate}
+\item FR1: Patient Registration
+\item FR2: Appointment Booking
+\item FR3: Medical Record Management
+\item FR4: Billing System
+\item FR5: User Access Control
+\item FR6: Reporting
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Non-Functional Requirements}
+\begin{itemize}
+\item \textbf{Performance:} <2 seconds load time
+\item \textbf{Security:} Encrypted passwords, JWT authentication
+\item \textbf{Scalability:} Handle 100+ concurrent users
+\item \textbf{Reliability:} 99.9\% uptime
+\item \textbf{Usability:} Intuitive dashboards
+\item \textbf{Compatibility:} Cross-browser, mobile responsive
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Implementation Plan}
+\begin{enumerate}
+\item \textbf{Phase 1:} Requirement Analysis (SRS completion)
+\item \textbf{Phase 2:} System Design (UML diagrams, database schema)
+\item \textbf{Phase 3:} Development (Frontend \& Backend modules)
+\item \textbf{Phase 4:} Testing (Unit, Integration, System testing)
+\item \textbf{Phase 5:} Deployment (Production environment)
+\item \textbf{Phase 6:} Maintenance (Updates and support)
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tools and Technologies}
+\begin{itemize}
+\item \textbf{Programming:} Python (Django), JavaScript (React)
+\item \textbf{Database:} PostgreSQL
+\item \textbf{Diagrams:} Draw.io, PlantUML
+\item \textbf{Testing:} Postman, Jest, Pytest
+\item \textbf{Version Control:} Git + GitHub
+\item \textbf{Deployment:} Vercel, DigitalOcean, Docker
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Deliverables}
+\begin{itemize}
+\item Software Requirements Specification (SRS)
+\item System Design Diagrams (Use Case, ER, DFD)
+\item Database Schema
+\item Source Code Repository
+\item Test Cases and Results
+\item User Manual
+\item Deployment Guide
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Conclusion}
+The HMS provides a comprehensive digital solution for Bangladesh's healthcare needs, incorporating best practices from leading hospitals while ensuring compliance with international standards.
+
+\textbf{Key Benefits:}
+\begin{itemize}
+\item Improved patient care
+\item Operational efficiency
+\item Data security
+\item Scalable architecture
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Thank You!}
+
+Questions?
+
+\textbf{Contact:} [Team Email/Contact Information]
+\end{center}
+\end{frame}
+
+\end{document}
