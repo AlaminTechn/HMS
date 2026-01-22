@@ -13,8 +13,17 @@
 \usepackage{titlesec}
 \usepackage{geometry}
 \geometry{a4paper, margin=1in}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows, positioning, fit, backgrounds, calc, trees}
+\tikzstyle{module} = [rectangle, rounded corners, minimum width=2.5cm, minimum height=1cm, text centered, draw=black, fill=blue!20]
+\tikzstyle{submodule} = [rectangle, rounded corners, minimum width=2cm, minimum height=0.8cm, text centered, draw=black, fill=green!20]
+\tikzstyle{leaf} = [rectangle, rounded corners, minimum width=1.8cm, minimum height=0.7cm, text centered, draw=black, fill=yellow!20, font=\small]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\tikzstyle{uibox} = [rectangle, draw=black, minimum width=8cm, minimum height=0.6cm, text centered]
+\tikzstyle{uiinput} = [rectangle, draw=black, minimum width=6cm, minimum height=0.5cm, fill=gray!10]
+\tikzstyle{uibutton} = [rectangle, draw=black, rounded corners, minimum width=2cm, minimum height=0.5cm, fill=blue!30]
 
-\titleformat{\chapter}[display]{\normalfont\huge\bfseries}{\underline{\chaptertitlename\ \thechapter}}{20pt}{\Huge}
+\titleformat{\chapter}[display]{\normalfont\huge\bfseries\centering}{\underline{\chaptertitlename\ \thechapter}}{20pt}{\Huge\centering}
 
 \begin{document}
 
@@ -30,27 +39,59 @@
 % Cover Page
 \begin{titlepage}
 \centering
-{\huge\bfseries Hospital Management System (HMS)}\\
-{\Large Full Project Report}\\
-{\Large Software Requirements Specification (SRS)}\\
 \vskip 1cm
-{\large University of Bangladesh}\\
-\vskip 2cm
+{\LARGE\bfseries A Report on}\\
+\vskip 0.5cm
+{\huge\bfseries Hospital Management System (HMS)}\\
+\vskip 1cm
+{\Large Software Requirements Specification (SRS)}\\
+\vskip 1.5cm
 {\Large Submitted by:}\\
-1. Alamin Sarker (Group Leader) - 202231064043\\
-2. Shuvo Shil - 202231064018\\
-3. Md Shakil - 202231064056\\
-4. Naimur Rahaman - 202231064050\\
-5. Tarin Mustari Sonia - 202231064010\\
-6. Jibon Roy - 202231064073\\
-7. Md Ahasan - 202231064131\\
-8. Abdullah Saad Un-Noor - 202231064097\\
-\vskip 2cm
-{\Large Supervised by:}\\
-Rifat Uz Zaman, Lecturer\\
-\vskip 2cm
-{\large 24.01.2026}
+\vskip 0.3cm
+{\large Alamin Sarker - 202231064043}\\
+\vskip 1.5cm
+{\large\bfseries Course Name: System Analysis and Design Lab}\\
+{\large\bfseries Course Code: CSE-4205}\\
+\vskip 1.5cm
+{\Large Submitted to:}\\
+{\large Rifat Uz Zaman, Lecturer}\\
+{\large Department of Computer Science and Engineering}\\
+{\large University of Bangladesh}\\
+\vskip 1.5cm
+{\large Date: 24.01.2026}
 \end{titlepage}
+
+% Project Contribution Table
+\newpage
+\section*{Project Name: Hospital Management System (HMS)}
+\vskip 0.5cm
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|l|c|c|}
+\hline
+\textbf{SL} & \textbf{Student Name} & \textbf{Student ID} & \textbf{Percentage of Work} \\
+\hline
+01 & Alamin Sarker (Group Leader) & 202231064043 & 20\% \\
+\hline
+02 & Shuvo Shil & 202231064018 & 12\% \\
+\hline
+03 & Md Shakil & 202231064056 & 12\% \\
+\hline
+04 & Naimur Rahaman & 202231064050 & 12\% \\
+\hline
+05 & Tarin Mustari Sonia & 202231064010 & 12\% \\
+\hline
+06 & Jibon Roy & 202231064073 & 12\% \\
+\hline
+07 & Md Ahasan & 202231064131 & 10\% \\
+\hline
+08 & Abdullah Saad Un-Noor & 202231064097 & 10\% \\
+\hline
+\multicolumn{3}{|r|}{\textbf{Total}} & \textbf{100\%} \\
+\hline
+\end{tabular}
+\caption{Project Contribution}
+\end{table}
 
 % Declaration
 \newpage
@@ -512,7 +553,715 @@ medical\_history & TEXT & - & - & Patient medical history \\
 \end{tabular}
 \end{table}
 
-% Continue with other tables as needed
+% Normalization Section
+\section{Normalization}
+The database design follows normalization principles to eliminate data redundancy and ensure data integrity.
+
+\subsection{First Normal Form (1NF)}
+All tables contain only atomic values with no repeating groups:
+\begin{itemize}
+\item Each column contains only single values
+\item Each row is unique with a primary key
+\item No duplicate columns within a single table
+\end{itemize}
+
+\subsection{Second Normal Form (2NF)}
+All tables are in 1NF and all non-key attributes are fully dependent on the primary key:
+\begin{itemize}
+\item Patient details depend entirely on patient\_id
+\item Appointment details depend on appointment\_id
+\item No partial dependencies exist
+\end{itemize}
+
+\subsection{Third Normal Form (3NF)}
+All tables are in 2NF and contain no transitive dependencies:
+\begin{itemize}
+\item Doctor specialization stored in Doctor table, not repeated
+\item Medicine prices stored in Medicine table only
+\item Room types stored with room\_id as reference
+\end{itemize}
+
+\subsection{Normalized Tables}
+\begin{enumerate}
+\item \textbf{User} - Contains user authentication data only
+\item \textbf{Patient} - Contains patient personal and medical data
+\item \textbf{Doctor} - Contains doctor professional information
+\item \textbf{Appointment} - Links patients with doctors for scheduled visits
+\item \textbf{Prescription} - Links to patient, doctor, and medicines
+\item \textbf{Medicine} - Contains medicine inventory details
+\item \textbf{Bill} - Contains billing information linked to patient
+\item \textbf{LabTest} - Contains test results linked to patient
+\item \textbf{Room} - Contains ward/room information
+\end{enumerate}
+
+% HIPO Section
+\section{Hierarchical Input Process Output (HIPO)}
+The HIPO (Hierarchical Input Process Output) model is a systems analysis design aid and documentation technique used for representing the modules of a system as a hierarchy and for documenting each module's input-process-output relationships.
+
+\subsection{HIPO Hierarchy Diagram}
+The following diagram shows the hierarchical structure of the Hospital Management System modules:
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    level 1/.style={sibling distance=4.5cm, level distance=2.5cm},
+    level 2/.style={sibling distance=2.5cm, level distance=2cm},
+    every node/.style={align=center},
+    edge from parent/.style={draw, -latex, thick}
+]
+\node [module, fill=red!30, minimum width=5cm] {\textbf{Hospital}\\\textbf{Management System}}
+    child {node [submodule] {Patient\\Management}
+        child {node [leaf] {Registration}}
+        child {node [leaf] {Search}}
+    }
+    child {node [submodule] {Appointment}
+        child {node [leaf] {Book}}
+        child {node [leaf] {Cancel}}
+    }
+    child {node [submodule] {Medical\\Records}
+        child {node [leaf] {View}}
+        child {node [leaf] {Update}}
+    }
+    child {node [submodule] {Billing}
+        child {node [leaf] {Generate}}
+        child {node [leaf] {Payment}}
+    };
+\end{tikzpicture}
+\caption{HIPO Hierarchy Diagram - Main Modules}
+\label{fig:hipo1}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    level 1/.style={sibling distance=4.5cm, level distance=2.5cm},
+    level 2/.style={sibling distance=2.5cm, level distance=2cm},
+    every node/.style={align=center},
+    edge from parent/.style={draw, -latex, thick}
+]
+\node [module, fill=red!30, minimum width=5cm] {\textbf{Hospital}\\\textbf{Management System}}
+    child {node [submodule] {Pharmacy}
+        child {node [leaf] {Inventory}}
+        child {node [leaf] {Dispense}}
+    }
+    child {node [submodule] {Laboratory}
+        child {node [leaf] {Order Test}}
+        child {node [leaf] {Results}}
+    }
+    child {node [submodule] {Ward\\Management}
+        child {node [leaf] {Admit}}
+        child {node [leaf] {Discharge}}
+    }
+    child {node [submodule] {Reports}
+        child {node [leaf] {Patient}}
+        child {node [leaf] {Financial}}
+    };
+\end{tikzpicture}
+\caption{HIPO Hierarchy Diagram - Additional Modules}
+\label{fig:hipo2}
+\end{figure}
+
+\subsection{IPO Charts}
+The following tables describe the Input-Process-Output for each major module:
+
+\subsection{Main Module: Hospital Management System}
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|}
+\hline
+\textbf{Input} & \textbf{Process} & \textbf{Output} \\
+\hline
+User credentials & Authentication & Access granted/denied \\
+\hline
+Patient data & Data validation & Patient record created \\
+\hline
+Appointment request & Schedule checking & Appointment confirmed \\
+\hline
+\end{tabular}
+\caption{HIPO - Main Module}
+\end{table}
+
+\subsection{Patient Registration Module}
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|}
+\hline
+\textbf{Input} & \textbf{Process} & \textbf{Output} \\
+\hline
+Patient name, DOB, contact & Validate input data & Validation status \\
+\hline
+Medical history & Store in database & Patient ID generated \\
+\hline
+Emergency contact & Link to patient record & Complete patient profile \\
+\hline
+\end{tabular}
+\caption{HIPO - Patient Registration}
+\end{table}
+
+\subsection{Appointment Booking Module}
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|}
+\hline
+\textbf{Input} & \textbf{Process} & \textbf{Output} \\
+\hline
+Patient ID, Doctor ID & Verify patient \& doctor & Verification status \\
+\hline
+Preferred date/time & Check availability & Available slots \\
+\hline
+Selected slot & Create appointment & Confirmation message \\
+\hline
+\end{tabular}
+\caption{HIPO - Appointment Booking}
+\end{table}
+
+\subsection{Billing Module}
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|}
+\hline
+\textbf{Input} & \textbf{Process} & \textbf{Output} \\
+\hline
+Patient ID, Services & Fetch service charges & Itemized list \\
+\hline
+Medicine list & Calculate total & Bill amount \\
+\hline
+Payment method & Process payment & Receipt generated \\
+\hline
+\end{tabular}
+\caption{HIPO - Billing Module}
+\end{table}
+
+\subsection{Pharmacy Module}
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|}
+\hline
+\textbf{Input} & \textbf{Process} & \textbf{Output} \\
+\hline
+Prescription ID & Verify prescription & Medicine list \\
+\hline
+Medicine quantity & Check stock availability & Stock status \\
+\hline
+Dispensing request & Update inventory & Dispensing confirmation \\
+\hline
+\end{tabular}
+\caption{HIPO - Pharmacy Module}
+\end{table}
+
+% Page Demo Section
+\section{Page Demo (User Interface Design)}
+This section presents the user interface wireframe designs for various system modules.
+
+\subsection{Login Page}
+The login page provides secure authentication for all user types.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+% Main container
+\draw[thick] (0,0) rectangle (10,8);
+
+% Header
+\fill[blue!40] (0,7) rectangle (10,8);
+\node at (5,7.5) {\textbf{\large Hospital Management System}};
+
+% Logo placeholder
+\draw[thick] (4,5.5) rectangle (6,6.5);
+\node at (5,6) {LOGO};
+
+% Login Form Box
+\draw[thick, rounded corners] (2,1) rectangle (8,5);
+\node at (5,4.6) {\textbf{User Login}};
+
+% Username field
+\node[anchor=west] at (2.3,4) {\small Username/Email:};
+\draw[fill=gray!10] (2.3,3.3) rectangle (7.7,3.8);
+
+% Password field
+\node[anchor=west] at (2.3,3) {\small Password:};
+\draw[fill=gray!10] (2.3,2.3) rectangle (7.7,2.8);
+
+% Role dropdown
+\node[anchor=west] at (2.3,2) {\small Select Role:};
+\draw[fill=gray!10] (2.3,1.4) rectangle (5.5,1.9);
+\node at (5.2,1.65) {\tiny $\blacktriangledown$};
+
+% Login button
+\draw[fill=blue!30, rounded corners] (5.8,1.4) rectangle (7.7,1.9);
+\node at (6.75,1.65) {\small Login};
+
+% Forgot password
+\node[blue] at (5,1.1) {\tiny Forgot Password?};
+\end{tikzpicture}
+\caption{Login Page Wireframe}
+\label{fig:login}
+\end{figure}
+
+\subsection{Admin Dashboard}
+The admin dashboard displays key statistics and quick access links.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+% Main container
+\draw[thick] (0,0) rectangle (12,9);
+
+% Header
+\fill[blue!40] (0,8) rectangle (12,9);
+\node at (6,8.5) {\textbf{\large Admin Dashboard}};
+
+% Sidebar
+\fill[gray!20] (0,0) rectangle (2.5,8);
+\node at (1.25,7.5) {\small Dashboard};
+\draw (0,7.2) -- (2.5,7.2);
+\node at (1.25,6.9) {\small Patients};
+\draw (0,6.6) -- (2.5,6.6);
+\node at (1.25,6.3) {\small Doctors};
+\draw (0,6) -- (2.5,6);
+\node at (1.25,5.7) {\small Appointments};
+\draw (0,5.4) -- (2.5,5.4);
+\node at (1.25,5.1) {\small Reports};
+
+% Stats boxes
+\draw[fill=green!20, rounded corners] (3,6) rectangle (5.5,7.5);
+\node at (4.25,7) {\small Total Patients};
+\node at (4.25,6.4) {\large \textbf{1,234}};
+
+\draw[fill=blue!20, rounded corners] (6,6) rectangle (8.5,7.5);
+\node at (7.25,7) {\small Total Doctors};
+\node at (7.25,6.4) {\large \textbf{45}};
+
+\draw[fill=yellow!20, rounded corners] (9,6) rectangle (11.5,7.5);
+\node at (10.25,7) {\small Appointments};
+\node at (10.25,6.4) {\large \textbf{89}};
+
+% Chart placeholder
+\draw[thick] (3,2.5) rectangle (7,5.5);
+\node at (5,5.2) {\small Monthly Revenue};
+\draw (3.5,3) -- (4,4) -- (4.5,3.5) -- (5,4.5) -- (5.5,4) -- (6,5) -- (6.5,4.2);
+
+% Recent activities
+\draw[thick] (7.5,2.5) rectangle (11.5,5.5);
+\node at (9.5,5.2) {\small Recent Activities};
+\node[anchor=west, font=\tiny] at (7.7,4.7) {Patient registered};
+\node[anchor=west, font=\tiny] at (7.7,4.3) {Appointment booked};
+\node[anchor=west, font=\tiny] at (7.7,3.9) {Bill generated};
+\node[anchor=west, font=\tiny] at (7.7,3.5) {Medicine dispensed};
+
+% Quick actions
+\draw[fill=blue!30, rounded corners] (3,1) rectangle (5,2);
+\node at (4,1.5) {\small Add Patient};
+
+\draw[fill=green!30, rounded corners] (5.5,1) rectangle (7.5,2);
+\node at (6.5,1.5) {\small New Appointment};
+
+\draw[fill=orange!30, rounded corners] (8,1) rectangle (10,2);
+\node at (9,1.5) {\small Generate Report};
+\end{tikzpicture}
+\caption{Admin Dashboard Wireframe}
+\label{fig:dashboard}
+\end{figure}
+
+\subsection{Patient Registration Form}
+The registration form collects patient personal and medical information.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+% Main container
+\draw[thick] (0,0) rectangle (12,10);
+
+% Header
+\fill[blue!40] (0,9) rectangle (12,10);
+\node at (6,9.5) {\textbf{\large Patient Registration}};
+
+% Form sections
+\draw[thick, rounded corners] (0.5,5.5) rectangle (5.8,8.8);
+\node at (3.15,8.5) {\textbf{\small Personal Information}};
+
+\node[anchor=west, font=\tiny] at (0.7,8) {Full Name:};
+\draw[fill=gray!10] (0.7,7.5) rectangle (5.5,7.9);
+
+\node[anchor=west, font=\tiny] at (0.7,7.2) {Date of Birth:};
+\draw[fill=gray!10] (0.7,6.7) rectangle (3,7.1);
+
+\node[anchor=west, font=\tiny] at (3.2,7.2) {Gender:};
+\draw[fill=gray!10] (3.2,6.7) rectangle (5.5,7.1);
+
+\node[anchor=west, font=\tiny] at (0.7,6.4) {NID Number:};
+\draw[fill=gray!10] (0.7,5.9) rectangle (5.5,6.3);
+
+% Contact section
+\draw[thick, rounded corners] (6.2,5.5) rectangle (11.5,8.8);
+\node at (8.85,8.5) {\textbf{\small Contact Details}};
+
+\node[anchor=west, font=\tiny] at (6.4,8) {Phone Number:};
+\draw[fill=gray!10] (6.4,7.5) rectangle (11.3,7.9);
+
+\node[anchor=west, font=\tiny] at (6.4,7.2) {Email Address:};
+\draw[fill=gray!10] (6.4,6.7) rectangle (11.3,7.1);
+
+\node[anchor=west, font=\tiny] at (6.4,6.4) {Address:};
+\draw[fill=gray!10] (6.4,5.9) rectangle (11.3,6.3);
+
+% Emergency contact
+\draw[thick, rounded corners] (0.5,2.8) rectangle (5.8,5.2);
+\node at (3.15,4.9) {\textbf{\small Emergency Contact}};
+
+\node[anchor=west, font=\tiny] at (0.7,4.5) {Contact Name:};
+\draw[fill=gray!10] (0.7,4) rectangle (5.5,4.4);
+
+\node[anchor=west, font=\tiny] at (0.7,3.7) {Relationship:};
+\draw[fill=gray!10] (0.7,3.2) rectangle (3,3.6);
+
+\node[anchor=west, font=\tiny] at (3.2,3.7) {Phone:};
+\draw[fill=gray!10] (3.2,3.2) rectangle (5.5,3.6);
+
+% Medical history
+\draw[thick, rounded corners] (6.2,2.8) rectangle (11.5,5.2);
+\node at (8.85,4.9) {\textbf{\small Medical History}};
+
+\node[anchor=west, font=\tiny] at (6.4,4.5) {Blood Group:};
+\draw[fill=gray!10] (6.4,4) rectangle (8.5,4.4);
+
+\node[anchor=west, font=\tiny] at (8.7,4.5) {Allergies:};
+\draw[fill=gray!10] (8.7,4) rectangle (11.3,4.4);
+
+\node[anchor=west, font=\tiny] at (6.4,3.7) {Previous Conditions:};
+\draw[fill=gray!10] (6.4,3.2) rectangle (11.3,3.6);
+
+% Buttons
+\draw[fill=blue!30, rounded corners] (4,0.8) rectangle (6,1.8);
+\node at (5,1.3) {\small Register};
+
+\draw[fill=gray!30, rounded corners] (6.5,0.8) rectangle (8.5,1.8);
+\node at (7.5,1.3) {\small Reset};
+\end{tikzpicture}
+\caption{Patient Registration Form Wireframe}
+\label{fig:patientreg}
+\end{figure}
+
+\subsection{Appointment Booking Interface}
+The appointment interface allows scheduling with available doctors.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+% Main container
+\draw[thick] (0,0) rectangle (12,9);
+
+% Header
+\fill[blue!40] (0,8) rectangle (12,9);
+\node at (6,8.5) {\textbf{\large Book Appointment}};
+
+% Doctor selection
+\draw[thick, rounded corners] (0.5,5) rectangle (5.8,7.8);
+\node at (3.15,7.5) {\textbf{\small Select Doctor}};
+
+\node[anchor=west, font=\tiny] at (0.7,7) {Department:};
+\draw[fill=gray!10] (0.7,6.5) rectangle (5.5,6.9);
+\node at (5.2,6.7) {\tiny $\blacktriangledown$};
+
+\node[anchor=west, font=\tiny] at (0.7,6.2) {Doctor:};
+\draw[fill=gray!10] (0.7,5.7) rectangle (5.5,6.1);
+\node at (5.2,5.9) {\tiny $\blacktriangledown$};
+
+\node[anchor=west, font=\tiny] at (0.7,5.4) {Fee: \textbf{BDT 500}};
+
+% Calendar
+\draw[thick, rounded corners] (6.2,5) rectangle (11.5,7.8);
+\node at (8.85,7.5) {\textbf{\small Select Date}};
+
+% Calendar grid
+\foreach \x in {0,1,2,3,4,5,6} {
+    \foreach \y in {0,1,2,3} {
+        \draw (6.5+\x*0.7,5.3+\y*0.5) rectangle (7.1+\x*0.7,5.7+\y*0.5);
+    }
+}
+\node[font=\tiny] at (8.85,7.1) {January 2026};
+
+% Time slots
+\draw[thick, rounded corners] (0.5,1.5) rectangle (5.8,4.7);
+\node at (3.15,4.4) {\textbf{\small Available Time Slots}};
+
+\draw[fill=green!20, rounded corners] (0.7,3.8) rectangle (2.2,4.2);
+\node[font=\tiny] at (1.45,4) {09:00 AM};
+
+\draw[fill=green!20, rounded corners] (2.4,3.8) rectangle (3.9,4.2);
+\node[font=\tiny] at (3.15,4) {10:00 AM};
+
+\draw[fill=gray!30, rounded corners] (4.1,3.8) rectangle (5.6,4.2);
+\node[font=\tiny] at (4.85,4) {11:00 AM};
+
+\draw[fill=green!20, rounded corners] (0.7,3.2) rectangle (2.2,3.6);
+\node[font=\tiny] at (1.45,3.4) {02:00 PM};
+
+\draw[fill=blue!30, rounded corners] (2.4,3.2) rectangle (3.9,3.6);
+\node[font=\tiny] at (3.15,3.4) {03:00 PM};
+
+\draw[fill=green!20, rounded corners] (4.1,3.2) rectangle (5.6,3.6);
+\node[font=\tiny] at (4.85,3.4) {04:00 PM};
+
+\node[font=\tiny] at (3.15,2.7) {$\square$ Available $\blacksquare$ Selected $\square$ Booked};
+
+% Notes
+\draw[thick, rounded corners] (6.2,1.5) rectangle (11.5,4.7);
+\node at (8.85,4.4) {\textbf{\small Appointment Notes}};
+\draw[fill=gray!10] (6.4,2) rectangle (11.3,4.1);
+
+% Book button
+\draw[fill=blue!30, rounded corners] (4.5,0.3) rectangle (7.5,1.2);
+\node at (6,0.75) {\small Book Appointment};
+\end{tikzpicture}
+\caption{Appointment Booking Wireframe}
+\label{fig:appointment}
+\end{figure}
+
+\subsection{Doctor's Consultation View}
+The consultation interface shows patient details and prescription writing area.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+% Main container
+\draw[thick] (0,0) rectangle (12,9);
+
+% Header
+\fill[blue!40] (0,8) rectangle (12,9);
+\node at (6,8.5) {\textbf{\large Patient Consultation}};
+
+% Patient info panel
+\draw[thick, rounded corners] (0.3,5.5) rectangle (4,7.8);
+\node at (2.15,7.5) {\textbf{\small Patient Info}};
+\node[anchor=west, font=\tiny] at (0.5,7.1) {Name: John Doe};
+\node[anchor=west, font=\tiny] at (0.5,6.7) {Age: 35 years};
+\node[anchor=west, font=\tiny] at (0.5,6.3) {Blood: O+};
+\node[anchor=west, font=\tiny] at (0.5,5.9) {ID: P-2024-001};
+
+% Vitals
+\draw[thick, rounded corners] (4.2,5.5) rectangle (7.8,7.8);
+\node at (6,7.5) {\textbf{\small Vitals}};
+\node[anchor=west, font=\tiny] at (4.4,7.1) {BP: 120/80 mmHg};
+\node[anchor=west, font=\tiny] at (4.4,6.7) {Temp: 98.6°F};
+\node[anchor=west, font=\tiny] at (4.4,6.3) {Pulse: 72 bpm};
+\node[anchor=west, font=\tiny] at (4.4,5.9) {Weight: 70 kg};
+
+% History
+\draw[thick, rounded corners] (8,5.5) rectangle (11.7,7.8);
+\node at (9.85,7.5) {\textbf{\small History}};
+\node[anchor=west, font=\tiny] at (8.2,7.1) {Diabetes - 2020};
+\node[anchor=west, font=\tiny] at (8.2,6.7) {Hypertension - 2022};
+\node[anchor=west, font=\tiny] at (8.2,6.3) {Last Visit: 10/01/26};
+
+% Prescription area
+\draw[thick, rounded corners] (0.3,0.8) rectangle (7.8,5.2);
+\node at (4.05,4.9) {\textbf{\small Prescription}};
+
+\node[anchor=west, font=\tiny] at (0.5,4.5) {Diagnosis:};
+\draw[fill=gray!10] (0.5,4) rectangle (7.5,4.4);
+
+\node[anchor=west, font=\tiny] at (0.5,3.7) {Medicines:};
+\draw[fill=gray!10] (0.5,2.3) rectangle (7.5,3.6);
+
+\node[anchor=west, font=\tiny] at (0.5,2) {Instructions:};
+\draw[fill=gray!10] (0.5,1.1) rectangle (7.5,1.9);
+
+% Actions
+\draw[thick, rounded corners] (8,0.8) rectangle (11.7,5.2);
+\node at (9.85,4.9) {\textbf{\small Actions}};
+
+\draw[fill=green!30, rounded corners] (8.3,4) rectangle (11.4,4.5);
+\node[font=\small] at (9.85,4.25) {Order Lab Test};
+
+\draw[fill=blue!30, rounded corners] (8.3,3.3) rectangle (11.4,3.8);
+\node[font=\small] at (9.85,3.55) {Save Prescription};
+
+\draw[fill=orange!30, rounded corners] (8.3,2.6) rectangle (11.4,3.1);
+\node[font=\small] at (9.85,2.85) {Print};
+
+\draw[fill=purple!30, rounded corners] (8.3,1.9) rectangle (11.4,2.4);
+\node[font=\small] at (9.85,2.15) {Refer Patient};
+
+\draw[fill=gray!30, rounded corners] (8.3,1.2) rectangle (11.4,1.7);
+\node[font=\small] at (9.85,1.45) {End Consultation};
+\end{tikzpicture}
+\caption{Doctor Consultation View Wireframe}
+\label{fig:consultation}
+\end{figure}
+
+\subsection{Billing Interface}
+The billing page displays service charges and payment options.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+% Main container
+\draw[thick] (0,0) rectangle (12,9);
+
+% Header
+\fill[blue!40] (0,8) rectangle (12,9);
+\node at (6,8.5) {\textbf{\large Patient Billing}};
+
+% Patient details
+\draw[thick, rounded corners] (0.3,6.5) rectangle (11.7,7.8);
+\node[anchor=west] at (0.5,7.5) {\small \textbf{Patient:} John Doe};
+\node[anchor=west] at (4,7.5) {\small \textbf{ID:} P-2024-001};
+\node[anchor=west] at (7,7.5) {\small \textbf{Date:} 24/01/2026};
+\node[anchor=west] at (0.5,6.9) {\small \textbf{Doctor:} Dr. Rahman};
+\node[anchor=west] at (4,6.9) {\small \textbf{Dept:} Medicine};
+
+% Bill items table
+\draw[thick] (0.3,3) rectangle (11.7,6.3);
+% Header row
+\fill[gray!30] (0.3,5.8) rectangle (11.7,6.3);
+\node[font=\small] at (1.5,6.05) {\textbf{SL}};
+\node[font=\small] at (4,6.05) {\textbf{Description}};
+\node[font=\small] at (7.5,6.05) {\textbf{Qty}};
+\node[font=\small] at (9.5,6.05) {\textbf{Amount (BDT)}};
+
+% Table lines
+\draw (0.3,5.8) -- (11.7,5.8);
+\draw (2.5,3) -- (2.5,6.3);
+\draw (6,3) -- (6,6.3);
+\draw (8.5,3) -- (8.5,6.3);
+
+% Data rows
+\node[font=\tiny] at (1.5,5.5) {1};
+\node[font=\tiny] at (4,5.5) {Consultation Fee};
+\node[font=\tiny] at (7.5,5.5) {1};
+\node[font=\tiny] at (9.5,5.5) {500.00};
+
+\node[font=\tiny] at (1.5,5) {2};
+\node[font=\tiny] at (4,5) {Blood Test - CBC};
+\node[font=\tiny] at (7.5,5) {1};
+\node[font=\tiny] at (9.5,5) {350.00};
+
+\node[font=\tiny] at (1.5,4.5) {3};
+\node[font=\tiny] at (4,4.5) {Medicine - Paracetamol};
+\node[font=\tiny] at (7.5,4.5) {10};
+\node[font=\tiny] at (9.5,4.5) {50.00};
+
+\node[font=\tiny] at (1.5,4) {4};
+\node[font=\tiny] at (4,4) {Medicine - Omeprazole};
+\node[font=\tiny] at (7.5,4) {14};
+\node[font=\tiny] at (9.5,4) {140.00};
+
+% Totals
+\draw[thick, rounded corners] (6.5,1) rectangle (11.7,2.8);
+\node[anchor=west, font=\small] at (6.7,2.5) {Subtotal:};
+\node[anchor=east, font=\small] at (11.5,2.5) {1,040.00};
+\node[anchor=west, font=\small] at (6.7,2) {VAT (5\%):};
+\node[anchor=east, font=\small] at (11.5,2) {52.00};
+\draw (6.7,1.7) -- (11.5,1.7);
+\node[anchor=west, font=\small\bfseries] at (6.7,1.35) {Total:};
+\node[anchor=east, font=\small\bfseries] at (11.5,1.35) {BDT 1,092.00};
+
+% Payment method
+\draw[thick, rounded corners] (0.3,1) rectangle (6.2,2.8);
+\node at (3.25,2.5) {\small \textbf{Payment Method}};
+\draw[fill=gray!10] (0.5,1.8) rectangle (3,2.2);
+\node[font=\tiny] at (1.75,2) {Cash};
+\draw[fill=gray!10] (3.2,1.8) rectangle (6,2.2);
+\node[font=\tiny] at (4.6,2) {Card/Mobile Banking};
+
+% Buttons
+\draw[fill=green!30, rounded corners] (0.5,0.3) rectangle (2.5,1);
+\node[font=\small] at (1.5,0.65) {Pay Now};
+
+\draw[fill=blue!30, rounded corners] (3,0.3) rectangle (5,1);
+\node[font=\small] at (4,0.65) {Print Bill};
+
+\draw[fill=gray!30, rounded corners] (5.5,0.3) rectangle (7.5,1);
+\node[font=\small] at (6.5,0.65) {Cancel};
+\end{tikzpicture}
+\caption{Billing Interface Wireframe}
+\label{fig:billing}
+\end{figure}
+
+% Input Control Section
+\section{Input Control}
+Input controls ensure data integrity and prevent invalid data entry into the system.
+
+\subsection{Validation Rules}
+
+\subsubsection{Patient Registration Validation}
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{3cm}|p{4cm}|p{5cm}|}
+\hline
+\textbf{Field} & \textbf{Validation Rule} & \textbf{Error Message} \\
+\hline
+Name & Required, 2-100 characters, letters only & "Please enter a valid name" \\
+\hline
+Date of Birth & Required, valid date, not future date & "Please enter a valid date of birth" \\
+\hline
+Phone & Required, 11 digits, starts with 01 & "Please enter a valid Bangladesh phone number" \\
+\hline
+Email & Optional, valid email format & "Please enter a valid email address" \\
+\hline
+NID & Optional, 10 or 17 digits & "Please enter a valid NID number" \\
+\hline
+\end{tabular}
+\caption{Patient Registration Input Controls}
+\end{table}
+
+\subsubsection{Appointment Booking Validation}
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{3cm}|p{4cm}|p{5cm}|}
+\hline
+\textbf{Field} & \textbf{Validation Rule} & \textbf{Error Message} \\
+\hline
+Patient ID & Required, must exist in database & "Patient not found" \\
+\hline
+Doctor ID & Required, must exist in database & "Doctor not found" \\
+\hline
+Date & Required, not past date & "Please select a future date" \\
+\hline
+Time & Required, within working hours & "Please select a valid time slot" \\
+\hline
+\end{tabular}
+\caption{Appointment Booking Input Controls}
+\end{table}
+
+\subsubsection{Medicine Entry Validation}
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{3cm}|p{4cm}|p{5cm}|}
+\hline
+\textbf{Field} & \textbf{Validation Rule} & \textbf{Error Message} \\
+\hline
+Medicine Name & Required, 2-200 characters & "Please enter medicine name" \\
+\hline
+Stock Quantity & Required, positive integer & "Please enter valid quantity" \\
+\hline
+Expiry Date & Required, future date & "Expiry date must be in future" \\
+\hline
+Price & Required, positive decimal & "Please enter valid price" \\
+\hline
+\end{tabular}
+\caption{Medicine Entry Input Controls}
+\end{table}
+
+\subsection{Security Controls}
+\begin{itemize}
+\item \textbf{SQL Injection Prevention:} All inputs are parameterized and sanitized
+\item \textbf{XSS Prevention:} HTML entities are escaped in output
+\item \textbf{CSRF Protection:} Token-based verification for all forms
+\item \textbf{Password Policy:} Minimum 8 characters, must include uppercase, lowercase, number, and special character
+\item \textbf{Session Management:} Auto-logout after 30 minutes of inactivity
+\item \textbf{Rate Limiting:} Maximum 5 failed login attempts before temporary lockout
+\end{itemize}
+
+\subsection{Error Handling}
+\begin{itemize}
+\item Clear, user-friendly error messages
+\item Field-level validation with real-time feedback
+\item Form-level validation on submission
+\item Server-side validation as final check
+\item Logging of all validation failures for audit
+\end{itemize}
 
 % Chapter 5: Implementation
 \chapter{Implementation}
